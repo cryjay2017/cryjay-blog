@@ -1,0 +1,17 @@
+﻿<div class="comment clearfix">
+  <div class="comment_content">
+    <p class="comment_title">
+      <strong>Title:</strong>
+      <%= comment.title %>
+    </p>
+    <p class="comment_body">
+      <strong>Comment:</strong>
+      <%= comment.body %>
+    </p>
+    <p class="comment_time">
+      <strong>Create_Time:</strong>
+      <%= time_ago_in_words(comment.created_at) %>
+    </p>
+  </div>
+  <%= link_to "删除", [comment.post, comment], method: :delete, data: { confirm: "Are you sure?"}, class: "btn btn-default" %>
+</div>

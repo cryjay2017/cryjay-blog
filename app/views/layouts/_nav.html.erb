@@ -1,0 +1,44 @@
+﻿<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <ul class="navbar-nav navbar-left">
+        <li><%= image_tag 'blog.jpg', size: "50x50", class: "navbar-brand img-circle" %></li>
+        <li><%= link_to 'Mypost', root_path, class: "navbar-brand" %><li>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        <% if user_signed_in? %>
+          <li><%= link_to 'Add post', new_post_path %></li>
+        <% end  %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <% Category.all.each do |category| %>
+              <li>
+                <%= link_to category.name, posts_path(category: category.name), class: "link" %>
+              </li>
+            <% end  %>
+          </ul>
+        </li>
+        <li><%= link_to "About", about_path %></li>
+        <li><a href="#">About</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right"> 
+        <li><%= link_to 'Sign Up', new_user_registration_path, class: "glyphicon glyphicon-user" %></li>
+        <% if user_signed_in? %> 
+          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out" %></li>
+        <% else  %>
+          <li><%= link_to 'Sign In', new_user_session_path, class: "glyphicon glyphicon-log-in" %></li>
+        <% end  %>
+      </ul>
+    </div> 
+  </div>
+</nav>

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 col-md-offset-1">
+      <h1>Posts</h1>
+      <% @posts.each do |post| %>
+        <h3><%= link_to post.title, post_path(post) %></h3>
+        <%= image_tag post.image.url(:medium) %>
+        <p><%= post.content %> by <%= post.user.email %></p>
+        <div class="btn btn-default">
+          <span class="icon"><i class="glyphicon glyphicon-heart"></i></span>
+          <span class="vote_count"><%= pluralize(post.get_upvotes.size, 'Like') %></span>
+        </div>
+        <div class="btn btn-default">
+          <span class="icon"><i class="glyphicon glyphicon-heart-empty"></i></span>
+          <span class="vote_count"><%= pluralize(post.get_downvotes.size, 'DisLike') %></span>  
+        </div>  
+        <%= link_to 'Edit', edit_post_path(post) %> |
+        <%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: "Are you sure"} %> 
+      <% end %>
+      <div><%= paginate @posts %></div>
+    </div>
+  </div>
+</div>
+
